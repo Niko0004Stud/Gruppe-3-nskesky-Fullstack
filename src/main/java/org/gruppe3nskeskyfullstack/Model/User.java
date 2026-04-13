@@ -1,4 +1,4 @@
-package org.gruppe3nskeskyfullstack.Model;
+package org.gruppe3nskeskyfullstack.model;
 
 import java.time.LocalDate;
 

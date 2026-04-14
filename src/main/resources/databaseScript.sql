@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS CloudWishProject;
+DROP DATABASE IF EXISTS WishDB;
 
-CREATE DATABASE CloudWishProject;
+CREATE DATABASE WishDB;
 
-USE CloudWishProject;
+USE WishDB;
 
 
 CREATE TABLE users (

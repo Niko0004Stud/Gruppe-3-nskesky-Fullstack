@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ØnskelisteController {
 
-    private final ØnskelisteInputValidering validering;
+    private ØnskelisteInputValidering validering;
     public ØnskelisteController(ØnskelisteInputValidering validering){
         this.validering=validering;
     }

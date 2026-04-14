@@ -3,9 +3,9 @@ package org.gruppe3nskeskyfullstack.controller;
 import  org.springframework.stereotype.Component;
 
 @Component
-public class ØnskelisteInputValidering {
+public class WishlistInputValidering {
 
-    public  void valideringøsnkelistenavn(String name){
+    public  void validationWishlist(String name){
 
         if (name==null){
             throw new IllegalArgumentException("ønskelistenavn må ikke være null");

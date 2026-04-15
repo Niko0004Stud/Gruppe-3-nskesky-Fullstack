@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @RestController
 public class Controller {
     private final UserInputValidering userInputValidering;
-    ArrayList<User> users = new ArrayList<User>();
+    ArrayList<User> users = new ArrayList<>();
 
     public Controller(UserInputValidering userInputValidering) {
         this.userInputValidering = userInputValidering;

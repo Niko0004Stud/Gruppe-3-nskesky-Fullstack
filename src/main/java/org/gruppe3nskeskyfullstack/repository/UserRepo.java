@@ -1,8 +1,8 @@
 package org.gruppe3nskeskyfullstack.repository;
 
 import org.gruppe3nskeskyfullstack.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,15 +15,16 @@ public class UserRepo {
 
     @Autowired
     DataSource dataSource;
-    public User verifyLogin(String email, String password){
+
+    public User verifyLogin(String email, String password) {
         User user = null;
         String sql = "SELECT * FROM users WHERE email = ?, password = ?";
 
-        try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)){
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            try(ResultSet resultSet = statement.executeQuery()){
-                if(resultSet != null ){
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet != null) {
                     user = new User();
                     user.setId(resultSet.getInt("id"));
                     user.setFirstName(resultSet.getString("firstName"));
@@ -33,13 +34,13 @@ public class UserRepo {
                     user.setGender(resultSet.getString("gender"));
                     user.setBirthDate(resultSet.getDate("birthDate").toLocalDate());
                     user.setPassword(resultSet.getString("password"));
-                }
-                else {
+                } else {
                     return null;
                 }
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
 }

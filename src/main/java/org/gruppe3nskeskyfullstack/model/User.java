@@ -14,6 +14,30 @@ public class User {
     private String password;
 
 
+    public User(int id, String first_name, String last_name, String email, String tlf_number,
+                String gender, LocalDate birth_date, String password){
+        this.id=id;
+        this.first_name=first_name;
+        this.last_name=last_name;
+        this.email=email;
+        this.tlf_number=tlf_number;
+        this.gender=gender;
+        this.birth_date=birth_date;
+        this.password=password;
+    }
+
+    public User(String first_name, String last_name, String email, String tlf_number,
+                String gender, LocalDate birth_date, String password){
+        this.first_name=first_name;
+        this.last_name=last_name;
+        this.email=email;
+        this.tlf_number=tlf_number;
+        this.gender=gender;
+        this.birth_date=birth_date;
+        this.password=password;
+    }
+    public User(){}
+
     public String getPassword() {
         return password;
     }

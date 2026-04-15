@@ -4,8 +4,20 @@ public class WishList {
 
     private String name;
     private int id;
-    private int userid;
+    private int userId;
 
+    public WishList(String name, int id, int userId){
+        this.name=name;
+        this.id=id;
+        this.userId=userId;
+    }
+
+    public WishList(String name, int id){
+        this.name=name;
+        this.id=id;
+    }
+
+    public WishList(){}
 
     public int getId() {
         return id;
@@ -16,7 +28,7 @@ public class WishList {
     }
 
     public int getUserid() {
-        return userid;
+        return userId;
     }
 
     public void setId(int id) {
@@ -28,6 +40,6 @@ public class WishList {
     }
 
     public void setUserid(int userid) {
-        this.userid = userid;
+        this.userId = userId;
     }
 }

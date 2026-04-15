@@ -5,7 +5,6 @@ public class CreateUser {
     public String firstName;
     public String lastName;
     public String password;
-    public int id;
     public int birthDate;
 
 }

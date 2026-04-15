@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
-public class WishlistRepo {
+public class WishListRepo {
 
     @Autowired
     private DataSource dataSource;
@@ -47,7 +47,7 @@ public class WishlistRepo {
         }
     }
 
-    public WishlistRepo(DataSource datasource){
+    public WishListRepo(DataSource datasource){
         this.datasource=datasource;
     }
 

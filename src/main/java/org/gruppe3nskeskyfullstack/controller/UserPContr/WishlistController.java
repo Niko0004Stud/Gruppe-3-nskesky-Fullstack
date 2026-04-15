@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WishlistController {
 
     @Autowired
-    WishListRepo wishlistRepo;
+    WishListRepo wishListRepo;
 
     @GetMapping("/getCreateWishlist")
     public String createWishList(){
@@ -25,29 +25,29 @@ public class WishlistController {
             @RequestParam("name") String name,
             @RequestParam("userID") String userID){
 
-        //WishList wishList = new WishList(name, userID); // userID skal findes på en anden måde
-        //wishlistRepo.saveWL();
+        WishList wishList = new WishList(/*name, userID*/); // userID skal findes på en anden måde
+        wishListRepo.saveWL(wishList);
         return "redirect:/";
     }
 
     @PostMapping("/getUpdateWishList")
     public String upDateWishList(@RequestParam("id") int id, Model model){
-        //WishList wishList = wishlistRepo.getWishListById(id);
-        //model.addAttribute(wishList);
+        WishList wishList = wishListRepo.getWLById(id);
+        model.addAttribute(wishList);
         return "updateWishList";
     }
 
     @GetMapping("/showWishlist")
     public String showWishlist(@RequestParam("id")int id, Model model){
-        //WishList wishList = WishListRepo.getWishlistById(id);
-        //model.addAttribute(wishList);
+        WishList wishList = wishListRepo.getWLById(id);
+        model.addAttribute(wishList);
 
         return "showWishList";
     }
 
     @PostMapping("/deleteWishList")
     public String deleteWishList(@RequestParam("id") int id){
-        //wishlistRepo.deleteWL(id);
+        wishListRepo.deleteWL(id);
 
         return"redirect:/"; // Skal nok være til userpage eller noget andet
     }

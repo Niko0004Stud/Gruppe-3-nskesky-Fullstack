@@ -16,25 +16,28 @@ public class WishListRepo {
 
     @Autowired
     private DataSource dataSource;
-    public ArrayList<WishList> getAllWLs(){
-        ArrayList<WishList> wishlists = new ArrayList<>();
-        String sql = "SELECT * FROM WishList";
+    public ArrayList<WishList> getAllWLsByUser(int userId){
+        ArrayList<WishList> wishLists = new ArrayList<>();
+        String sql = "SELECT * FROM WishList WHERE user_ID = ?";
 
         try(Connection connection = dataSource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery()){
+            PreparedStatement statement = connection.prepareStatement(sql)){
+
+            statement.setInt(1,userId);
+
+            ResultSet resultSet = statement.executeQuery();
 
             while(resultSet.next()){
                 WishList wishList = new WishList();
                 wishList.setId(resultSet.getInt("ID"));
                 wishList.setUserid(resultSet.getInt("user_ID"));
                 wishList.setName(resultSet.getString("name"));
-                wishlists.add(wishList);
+                wishLists.add(wishList);
             }
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return wishlists;
+        return wishLists;
     }
 
     public void saveWL(WishList wishList){

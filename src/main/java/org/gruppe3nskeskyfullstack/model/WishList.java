@@ -39,7 +39,7 @@ public class WishList {
         this.name = name;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(int userId) {
         this.userId = userId;
     }
 }

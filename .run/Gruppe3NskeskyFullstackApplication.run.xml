@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Gruppe3NskeskyFullstackApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <envs>
+      <env name="DB_PASSWORD" value="522589" />
+      <env name="DB_URL" value="jdbc:mysql://172.161.64.218:3306/WishDB" />
+      <env name="DB_USER" value="root" />
+    </envs>
+    <module name="Gruppe-3-nskesky-Fullstack" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.gruppe3nskeskyfullstack.Gruppe3NskeskyFullstackApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class WishlistController {
 
-    private WishlistInputValidering validation;
+    private WishlistInputValidation validation;
 
-    public WishlistController(WishlistInputValidering validation){
+    public WishlistController(WishlistInputValidation validation){
         this.validation=validation;
     }
 
-    @GetMapping("testValideringøsnkelistenavn")
-    public  String testValidering(@RequestParam String name){
+    @GetMapping("testWishlistName")
+    public  String testWishlistValidation(@RequestParam String name){
         validation.validationWishlist(name);
-        return "Gyldig ønskelistenavn "+name;
+        return "Wishlist name acceptet: "+name;
     }
 
 }

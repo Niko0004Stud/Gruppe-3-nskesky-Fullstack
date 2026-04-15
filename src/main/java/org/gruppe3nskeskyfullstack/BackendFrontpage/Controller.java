@@ -1,7 +1,7 @@
 package org.gruppe3nskeskyfullstack.BackendFrontpage;
 
 import org.gruppe3nskeskyfullstack.controller.UserInputValidering;
-import org.springframework.validation.Validator;
+import org.gruppe3nskeskyfullstack.model.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 @RestController
 public class Controller {
     private final UserInputValidering userInputValidering;
-    ArrayList<CreateUser> users = new ArrayList<>();
+    ArrayList<User> users = new ArrayList<User>();
 
     public Controller(UserInputValidering userInputValidering) {
         this.userInputValidering = userInputValidering;
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody CreateUser user){
-        userInputValidering.validateName(user.getName);
+    public String register(@RequestBody User user){
+        userInputValidering.validateName(user.getFirstName());
         users.add(user);
 
         return "User account is created ";

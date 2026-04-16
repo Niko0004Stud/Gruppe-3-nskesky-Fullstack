@@ -19,21 +19,26 @@ public class LoginController {
         this.userService=userService;
     }
 
-    @GetMapping("/login")
+    @GetMapping("/logins")
     public String showLoginPage(){
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email,
-                        @RequestParam String password,
-                        HttpSession session){
+    @GetMapping("test")
+    public void testSOUT(){
+        System.out.println("testen virkede");
+    }
 
+    @PostMapping("/login")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password/*,
+                        HttpSession session*/){
+        System.out.println("Du kom ind i login()");
         User user = userService.login(email, password);
 
         if(user!=null){
-            session.setAttribute("user", user);
-
+            //session.setAttribute("user", user);
+            System.out.println("Det virkede!");
             return "redirect:/userPage";
         }
 

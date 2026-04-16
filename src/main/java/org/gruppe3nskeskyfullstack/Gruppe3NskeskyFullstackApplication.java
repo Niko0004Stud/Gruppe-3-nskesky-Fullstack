@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Gruppe3NskeskyFullstackApplication {
 
     public static void main(String[] args) {
-        System.out.println(System.getenv("DB_URL"));
         SpringApplication.run(Gruppe3NskeskyFullstackApplication.class, args);
     }
-
 }

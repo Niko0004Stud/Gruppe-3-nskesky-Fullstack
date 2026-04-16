@@ -24,20 +24,25 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email,
-                        @RequestParam String password,
-                        HttpSession session){
+    @GetMapping("/")
+    public String homepage(){
+        return "index";
+    }
 
+    @PostMapping("/")
+    public String login(@RequestParam("email") String email,
+                        @RequestParam("password") String password,
+                        HttpSession session){
+        System.out.println("Du kom ind i login()");
         User user = userService.login(email, password);
 
         if(user!=null){
             session.setAttribute("user", user);
-
-            return "redirect:/userPage";
+            System.out.println("Det virkede!");
+            return "redirect:/";
         }
-
-        return "login"; //ved fejlet login
+        System.out.println("forkerte logindetaljer");
+        return "redirect:/"; //ved fejlet login
 
     }
     @GetMapping("/logout")

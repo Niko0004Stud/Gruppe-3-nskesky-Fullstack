@@ -2,10 +2,9 @@ package org.gruppe3nskeskyfullstack.controller;
 
 import org.springframework.stereotype.Controller;
 
-@Controller
-public class UserInputValidering {
+import java.time.LocalDate;
 
-@Component
+@Controller
 public class UserInputValidation {
 
     // name VARCHAR(50) NOT NULL - Natasha
@@ -59,7 +58,7 @@ public class UserInputValidation {
         }
     }
 
-    // gender VARCHAR(20) NOT NULL-estera
+    // gender VARCHAR(20) NOT NULL
     public void validateGender(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Gender cannot be null");
@@ -75,41 +74,30 @@ public class UserInputValidation {
         }
     }
 
-    //tlfNumber VARCHAR(20) NOT NULL-estera
+    //tlfNumber VARCHAR(20) NOT NULL
     public void validateTlfNr(String number) {
         if (number == null) {
             throw new IllegalArgumentException("Phone number cannot be null");
         }
 
-        String trimmed=number.trim();
-        if ( trimmed.length()==0 || trimmed.length()>20) {
+        String trimmed = number.trim();
+        if (trimmed.length() == 0 || trimmed.length() > 20) {
             throw new IllegalArgumentException("The phone number must be between 1-20 characters");
         }
 
-        if (!trimmed.matches("^[0-9]+$")){
+        if (!trimmed.matches("^[0-9]+$")) {
             throw new IllegalArgumentException("Phone number can only contain numbers");
         }
     }
-    }
 
     //birthDate DATE NOT NULL
-    public void birthDate(String bithDate) {
-        if (bithDate == null) {
-            throw new IllegalArgumentException(" Birth Date cannot be null");
-        }
-
-    //birthDate DATE NOT NULL-estera
     public void validateBirthDate(LocalDate birthDate) {
         if (birthDate == null) {
             throw new IllegalArgumentException("Birthdate cannot be null");
-        String trimmed = bithDate.trim();
-        if (trimmed.length() < 4 || trimmed.length() > 10) {
-            throw new IllegalArgumentException("Gender cannot contain more than 10 characters");
         }
 
-        if(!birthDate.isBefore(LocalDate.now())){
+        if (!birthDate.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Birhdate can only be in the past");
         }
     }
-
 }

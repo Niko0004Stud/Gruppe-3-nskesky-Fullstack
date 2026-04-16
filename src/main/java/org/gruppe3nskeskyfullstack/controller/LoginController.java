@@ -41,8 +41,8 @@ public class LoginController {
             System.out.println("Det virkede!");
             return "redirect:/";
         }
-
-        return "/"; //ved fejlet login
+        System.out.println("forkerte logindetaljer");
+        return "redirect:/"; //ved fejlet login
 
     }
     @GetMapping("/logout")

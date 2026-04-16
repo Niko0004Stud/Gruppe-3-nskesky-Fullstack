@@ -1,4 +1,4 @@
-package org.gruppe3nskeskyfullstack.controller;
+package org.gruppe3nskeskyfullstack.service.Validation;
 
 import  org.springframework.stereotype.Component;
 

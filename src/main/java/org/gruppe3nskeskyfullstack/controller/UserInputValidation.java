@@ -1,9 +1,11 @@
 package org.gruppe3nskeskyfullstack.controller;
 
 import org.springframework.stereotype.Controller;
+import  org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
+@Component
 @Controller
 public class UserInputValidation {
 
@@ -19,6 +21,8 @@ public class UserInputValidation {
             throw new IllegalArgumentException("Name must be between 3 and 50 characters");
         }
 
+        if (!trimmed.matches("[\\p{L}]")) {
+            throw new IllegalArgumentException("Username can only contain these charachers: a-z A-Z");
         if (!trimmed.matches("[\\p{L}]+")) {
             throw new IllegalArgumentException("Username can only contain these letters: a-z A-Z");
         }
@@ -31,33 +35,44 @@ public class UserInputValidation {
         }
 
         String trimmed = password.trim();
+        if (trimmed.length() < 3 || trimmed.length() > 50) {
         if (trimmed.length() < 5 || trimmed.length() > 50) {
             throw new IllegalArgumentException("password must be between 5 and 50 characters");
         }
+        if (!trimmed.matches("[\\p{L}0-9]")) {
         if (!trimmed.matches("[\\p{L}0-9]+")) {
             throw new IllegalArgumentException("password can only contain these charachers: a-z A-Z 0-9");
         }
 
     }
 
+    // email VARCHAR(100) NOT NULL -Natsaha
+    public void validateEmail(String Email) {
+        if (Email == null) {
     // email VARCHAR(100) NOT NULL
     public void validateEmail(String email) {
         if (email == null) {
             throw new IllegalArgumentException("Email cannot be null");
         }
 
+        String trimmed = Email.trim();
         String trimmed = email.trim();
         if (trimmed.length() < 3 || trimmed.length() > 100) {
+            throw new IllegalArgumentException("password must be between 3 and 100 characters");
             throw new IllegalArgumentException("Email must be between 3 and 100 characters");
         }
         if (!trimmed.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             throw new IllegalArgumentException("Invalid input ");
+        if (!trimmed.matches("[\\p{L}0-9]")) {
+            throw new IllegalArgumentException("password can only contain these charachers: a-z A-Z 0-9 ");
         }
         if (!email.contains("@")) {
+        if (!Email.contains("@")) {
             System.out.println("The mail must contain @");
         }
     }
 
+    // gender VARCHAR(20) NOT NULL-estera
     // gender VARCHAR(20) NOT NULL
     public void validateGender(String name) {
         if (name == null) {
@@ -75,17 +90,18 @@ public class UserInputValidation {
     }
 
     //tlfNumber VARCHAR(20) NOT NULL
+    //tlfNumber VARCHAR(20) NOT NULL-estera
     public void validateTlfNr(String number) {
         if (number == null) {
             throw new IllegalArgumentException("Phone number cannot be null");
         }
 
-        String trimmed = number.trim();
-        if (trimmed.length() == 0 || trimmed.length() > 20) {
+        String trimmed=number.trim();
+        if ( trimmed.length()==0 || trimmed.length()>20) {
             throw new IllegalArgumentException("The phone number must be between 1-20 characters");
         }
 
-        if (!trimmed.matches("^[0-9]+$")) {
+        if (!trimmed.matches("^[0-9]+$")){
             throw new IllegalArgumentException("Phone number can only contain numbers");
         }
     }
@@ -96,8 +112,9 @@ public class UserInputValidation {
             throw new IllegalArgumentException("Birthdate cannot be null");
         }
 
-        if (!birthDate.isBefore(LocalDate.now())) {
+        if(!birthDate.isBefore(LocalDate.now())){
             throw new IllegalArgumentException("Birhdate can only be in the past");
         }
+
     }
 }

@@ -19,30 +19,30 @@ public class LoginController {
         this.userService=userService;
     }
 
-    @GetMapping("/logins")
+    @GetMapping("/login")
     public String showLoginPage(){
         return "login";
     }
 
-    @GetMapping("test")
-    public void testSOUT(){
-        System.out.println("testen virkede");
+    @GetMapping("/")
+    public String homepage(){
+        return "index";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password/*,
-                        HttpSession session*/){
+                        @RequestParam("password") String password,
+                        HttpSession session){
         System.out.println("Du kom ind i login()");
         User user = userService.login(email, password);
 
         if(user!=null){
-            //session.setAttribute("user", user);
+            session.setAttribute("user", user);
             System.out.println("Det virkede!");
-            return "redirect:/userPage";
+            return "redirect:/";
         }
 
-        return "login"; //ved fejlet login
+        return "/"; //ved fejlet login
 
     }
     @GetMapping("/logout")

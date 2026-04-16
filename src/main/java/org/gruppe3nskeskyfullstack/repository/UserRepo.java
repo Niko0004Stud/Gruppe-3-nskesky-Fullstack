@@ -18,13 +18,16 @@ public class UserRepo {
 
     public User verifyLogin(String email, String password) {
         User user = null;
-        String sql = "SELECT * FROM users WHERE email = ?, password = ?";
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
+            statement.setString(1, email);
+            statement.setString(2, password);
+
             try (ResultSet resultSet = statement.executeQuery()) {
-                if (resultSet != null) {
+                if (resultSet != null && resultSet.next()) {
                     user = new User();
                     user.setId(resultSet.getInt("id"));
                     user.setFirstName(resultSet.getString("firstName"));
@@ -34,6 +37,7 @@ public class UserRepo {
                     user.setGender(resultSet.getString("gender"));
                     user.setBirthDate(resultSet.getDate("birthDate").toLocalDate());
                     user.setPassword(resultSet.getString("password"));
+
                 } else {
                     return null;
                 }
@@ -41,6 +45,9 @@ public class UserRepo {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println("returnPoint"+user.getEmail());
+        System.out.println(user.getFirstName());
         return user;
     }
 }

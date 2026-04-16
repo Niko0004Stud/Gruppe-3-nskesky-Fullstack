@@ -14,6 +14,7 @@ public class UserInputValidering {
         validateTlfNr(user.getTlfNumber());
         validateGender(user.getGender());
         validateBirthDate(user.getBirthDate().toString());
+        validatePassword(user.getPassword());
     }
     // name VARCHAR(50) NOT NULL
     public void validateName(String name) {

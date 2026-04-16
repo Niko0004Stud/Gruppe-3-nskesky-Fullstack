@@ -4,7 +4,7 @@ import org.gruppe3nskeskyfullstack.model.User;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class UserInputValidering {
+public class UserInputValidation {
 
 
 

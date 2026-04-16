@@ -24,6 +24,7 @@ public class RegisterController {
 
             userInputValidering.validateUser(user);
             userRepo.saveUser(user);
+            users.add(user);
 
             return "/userPage";
         }

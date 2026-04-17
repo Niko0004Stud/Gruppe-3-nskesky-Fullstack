@@ -27,7 +27,7 @@ public class WishlistController {
 
         WishList wishList = new WishList(/*name, userID*/); // userID skal findes på en anden måde
         wishListRepo.saveWL(wishList);
-        return "redirect:/";
+        return "redirect:/userPage";
     }
 
     @PostMapping("/getUpdateWishList")
@@ -37,18 +37,11 @@ public class WishlistController {
         return "updateWishList";
     }
 
-    @GetMapping("/showWishlist")
-    public String showWishlist(@RequestParam("id")int id, Model model){
-        WishList wishList = wishListRepo.getWLById(id);
-        model.addAttribute(wishList);
-
-        return "showWishList";
-    }
 
     @PostMapping("/deleteWishList")
     public String deleteWishList(@RequestParam("id") int id){
         wishListRepo.deleteWL(id);
 
-        return"redirect:/"; // Skal nok være til userpage eller noget andet
+        return"redirect:/userPage"; // Skal nok være til userpage eller noget andet
     }
 }

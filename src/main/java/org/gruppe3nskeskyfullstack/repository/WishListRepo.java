@@ -18,7 +18,8 @@ public class WishListRepo {
     private DataSource dataSource;
     public ArrayList<WishList> getAllWLsByUser(int userId){
         ArrayList<WishList> wishLists = new ArrayList<>();
-        String sql = "SELECT * FROM WishList WHERE user_ID = ?";
+        String sql = "SELECT * FROM wishlists WHERE userID = ?";
+        System.out.println("userId: " + userId);
 
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
@@ -26,11 +27,12 @@ public class WishListRepo {
             statement.setInt(1,userId);
 
             ResultSet resultSet = statement.executeQuery();
+            System.out.println("userId: " + userId);
 
             while(resultSet.next()){
                 WishList wishList = new WishList();
                 wishList.setId(resultSet.getInt("ID"));
-                wishList.setUserid(resultSet.getInt("user_ID"));
+                wishList.setUserid(resultSet.getInt("userID"));
                 wishList.setName(resultSet.getString("name"));
                 wishLists.add(wishList);
             }
@@ -41,7 +43,7 @@ public class WishListRepo {
     }
 
     public void saveWL(WishList wishList){
-        String sql = "INSERT INTO wishList (ID, user_ID, name) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO wishList (ID, userID, name) VALUES (?, ?, ?)";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 
@@ -80,7 +82,7 @@ public class WishListRepo {
                 if (resultSet.next()){
                     wishList = new WishList();
                     wishList.setId(resultSet.getInt("ID"));
-                    wishList.setUserid(resultSet.getInt("user_ID"));
+                    wishList.setUserid(resultSet.getInt("userID"));
                     wishList.setName(resultSet.getString("name"));
                 }
             }
@@ -91,7 +93,7 @@ public class WishListRepo {
     }
 
     public void updateWL(WishList wishList){
-        String sql = "UPDATE wishList SET id = ?, user_id = ?, name = ?";
+        String sql = "UPDATE wishList SET id = ?, userid = ?, name = ?";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 

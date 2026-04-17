@@ -52,12 +52,12 @@ public class UserRepo {
         System.out.println(user.getFirstName());
         return user;
     }
-private User user;
+//private User user;
     public void saveUser(User user){
         String sql = "INSERT INTO users ( firstName, lastName, email, tlfNumber, gender, birthDate, password) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
-
+            System.out.println("Du kom til saveUser()");
             statement.setString(1, user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, user.getEmail());

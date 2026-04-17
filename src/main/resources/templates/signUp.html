@@ -16,24 +16,26 @@
                 <div class="loginBoxMain">
                     <form class="signUpForm" th:action="@{/trySignUp}" method="post">
                         <label for="fNameField">First Name:</label>
-                        <input type="text" name="firstName" class="loginField" id="fNameField" required>
+                        <input type="text" name="firstName" class="loginField" id="fNameField" value="SignUpFName" required>
                         <label for="lNameField">Last Name:</label>
-                        <input type="text" name="lastName" class="loginField" id="lNameField" required>
+                        <input type="text" name="lastName" class="loginField" id="lNameField" value="SignUpLName" required>
                         <label for="emailField">Email:</label>
-                        <input type="email" name="email" class="loginField" id="emailField" required>
+                        <input type="email" name="email" class="loginField" id="emailField" value="SignUP@test.Up" required>
                         <label for="tlfNumberField">Phone number:</label>
-                        <input type="number" name="tlfNumber" class="loginField" id="tlfNumberField" required>
+                        <input type="text" name="tlfNumber" class="loginField" id="tlfNumberField" value="SignUptlf" required>
                         <label for="genderChoice">Gender:</label>
-                            <div id="genderChoice">
+                            <div id="genderChoice" >
                                 <label  for="manRadio">Man:</label>
-                                <input type="radio" name="gender" class="loginField" id="manRadio" required>
-                                <label  for="manRadio">Man:</label>
-                                <input type="radio" name="gender" class="loginField" id="womanRadio" required>
-                                <label  for="manRadio">Other:</label>
-                                <input type="text" name="gender" class="loginField" id="genderRadio" required>
+                                <input type="radio" name="gender" class="loginField" id="manRadio" value="Man" required>
+                                <label  for="manRadio">Woman:</label>
+                                <input type="radio" name="gender" class="loginField" id="womanRadio" value="Moman" required>
+<!--                                <label  for="genderField">Other:</label>-->
+<!--                                <input type="text" name="gender" class="loginField" id="genderField" required >-->
                             </div>
+                        <label for="birthDate">birthDate:</label>
+                        <input type="date" name="birthDate" class="loginField" id="birthDate" value="67-67-6767" required>
                         <label for="passwordField">Password:</label>
-                        <input type="password" name="password" class="loginField" id="passwordField" required><br>
+                        <input type="password" name="password" class="loginField" id="passwordField" value="SignUpPassword" required><br>
                         <button  type="submit" class="btn">Submit</button>
                     </form>
                 </div>

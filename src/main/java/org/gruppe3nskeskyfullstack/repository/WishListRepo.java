@@ -43,7 +43,7 @@ public class WishListRepo {
     }
 
     public void saveWL(WishList wishList){
-        String sql = "INSERT INTO wishList (ID, userID, name) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO wishlists (ID, userID, name) VALUES (?, ?, ?)";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 
@@ -58,7 +58,7 @@ public class WishListRepo {
     }
 
     public void deleteWL(int id) {
-        String sql = "SELECT * FROM wishlist WHERE id=?";
+        String sql = "DELETE FROM wishlists WHERE id=?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -71,7 +71,7 @@ public class WishListRepo {
     }
     public WishList getWLById(int id){
         WishList wishList = null;
-        String sql = "SELECT * FROM wishlist WHERE id = ?";
+        String sql = "SELECT * FROM wishlists WHERE id = ?";
 
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
@@ -93,7 +93,7 @@ public class WishListRepo {
     }
 
     public void updateWL(WishList wishList){
-        String sql = "UPDATE wishList SET id = ?, userid = ?, name = ?";
+        String sql = "UPDATE wishlists SET id = ?, userid = ?, name = ?";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 

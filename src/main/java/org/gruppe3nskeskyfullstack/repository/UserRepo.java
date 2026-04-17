@@ -1,7 +1,6 @@
 package org.gruppe3nskeskyfullstack.repository;
 
 import org.gruppe3nskeskyfullstack.model.User;
-import org.gruppe3nskeskyfullstack.model.WishList;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -54,7 +53,8 @@ public class UserRepo {
     }
 private User user;
     public void saveUser(User user){
-        String sql = "INSERT INTO users ( firstName, lastName, email, tlfNumber, gender, birthDate, password) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users ( firstName, lastName, email, tlfNumber, gender, birthDate, password)" +
+                " VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         try(Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)){
 

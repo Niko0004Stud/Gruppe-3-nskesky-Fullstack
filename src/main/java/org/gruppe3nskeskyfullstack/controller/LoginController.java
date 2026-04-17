@@ -19,10 +19,10 @@ public class LoginController {
         this.userService=userService;
     }
 
-    @GetMapping("/login")
-    public String showLoginPage(){
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String showLoginPage(){
+//        return "login";
+//    }
 
     @PostMapping("/tryLogin")
     public String login(@RequestParam("email") String email,
@@ -34,7 +34,7 @@ public class LoginController {
         if(user!=null){
             session.setAttribute("user", user);
             System.out.println("Det virkede!");
-            return "redirect:/";
+            return "redirect:/userPage";
         }
         System.out.println("forkerte logindetaljer");
         return "redirect:/"; //ved fejlet login

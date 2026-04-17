@@ -1,6 +1,6 @@
 package org.gruppe3nskeskyfullstack.controller.UserPContr;
 
-import org.gruppe3nskeskyfullstack.service.Validation.UserInputValidering;
+import org.gruppe3nskeskyfullstack.service.Validation.UserInputValidation;
 import org.gruppe3nskeskyfullstack.model.User;
 import org.gruppe3nskeskyfullstack.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.ArrayList;
 @Controller
 public class RegisterController {
-        private final UserInputValidering userInputValidering;
+        private final UserInputValidation userInputValidation;
         ArrayList<User> users = new ArrayList<>();
 
-        public RegisterController(UserInputValidering userInputValidering) {
-            this.userInputValidering = userInputValidering;
+        public RegisterController(UserInputValidation userInputValidation) {
+            this.userInputValidation = userInputValidation;
         }
         @Autowired
         private UserRepo userRepo;
@@ -22,7 +22,7 @@ public class RegisterController {
         @PostMapping("/submit")
         public String register(User user){
 
-            userInputValidering.validateUser(user);
+            userInputValidation.validateUser(user);
             userRepo.saveUser(user);
             users.add(user);
 

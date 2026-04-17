@@ -56,7 +56,7 @@ public class WishListRepo {
     }
 
     public void deleteWL(int id) {
-        String sql = "SELECT * FROM wishlist WHERE id=?";
+        String sql = "DELETE FROM wishlist WHERE id=?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

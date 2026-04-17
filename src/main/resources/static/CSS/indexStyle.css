@@ -1,0 +1,60 @@
+h1{
+    max-height: 1pc;
+    padding-bottom: 3px;
+}
+
+label{
+    display: block;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    height: auto;
+}
+
+.loginBox{
+    display: inline-block;
+    width: auto;
+    min-width: 23%;
+    height: auto;
+    margin: 5%;
+    background-color: beige;
+}
+
+.loginBoxHead{
+    display: flex;
+    height: auto;
+    padding-left:   10px;
+    background-color: azure;
+}
+
+.loginBoxMain{
+    border: 1px dimgray solid;
+    height: auto;
+    min-height: 10pc;
+    display: flex;
+    justify-content: center;
+    padding-top: 2pc;
+    padding-bottom: 2pc;
+}
+
+.loginForm{
+    margin-top: 15px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.loginField{
+    margin-bottom: 5px;
+}
+
+.btn{
+    margin: 5px;
+}
+
+.loginBoxFoot{
+    background-color: lightgray;
+}

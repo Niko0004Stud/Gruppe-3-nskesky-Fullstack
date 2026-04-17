@@ -2,24 +2,3 @@ body{
 
 }
 
-.testBox{
-    padding: 20px;
-    margin: 20px;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-label{
-    display: block;
-}
-
-.loginBox{
-    padding: 20px;
-    margin: 20px;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}

@@ -16,12 +16,14 @@ public class UserPageController {
     @Autowired
     private WishListRepo wishListRepo;
 
-    @GetMapping("/showWishList")
-    public String showWishlist(@RequestParam("id")int id, Model model){
+    @GetMapping("/showWishlist")
+    public String showWishlist(@RequestParam("id")int id,
+                               Model model,
+                               HttpSession session){
         WishList wishList = wishListRepo.getWLById(id);
         model.addAttribute(wishList);
-
-        return "showWishList";
+        System.out.println("Du nåede til return wishlist");
+        return "wishlist";
     }
 
     @GetMapping("/userPage")

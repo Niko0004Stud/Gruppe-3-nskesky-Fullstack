@@ -50,7 +50,7 @@ public class WishRepo {
     public void saveWish(Wish wish){
         String sql="INSERT INTO wishes ( wishlistID, name, price, url) VALUES(?,?,?,?)";
         //sql komando. databasen siger opret en ny række i wishes.. fyld kolonnerne:wishlistID, name, price, url
-
+        System.out.println("Du kom ind i saveWish()");
         try (Connection connection=dataSource.getConnection();
         PreparedStatement statement= connection.prepareStatement(sql)){
             statement.setInt(1,wish.getWishlistID());//henter wishlistID fra wishobjekt og sætter værdien ind i sqlkomando

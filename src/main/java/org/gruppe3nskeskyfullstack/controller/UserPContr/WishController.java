@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class WishController {
@@ -37,13 +40,13 @@ public class WishController {
         System.out.println("Du kom ind i createWish()");
         /*WishList wishList = (WishList) httpSession.getAttribute("wishList");
         int wishlistId = wishList.getId();*/
-        if(url==null){
+        if(url==null || url.isEmpty()){
             url="noURL";
         }
         Wish wish = new Wish(wishlistId, name, price, url);
         wishRepo.saveWish(wish);
 
-        return "redirect:/showWishlist?id="+wishlistId;
+        return "redirect:/showWishes?id="+wishlistId;
 
     }
 
@@ -58,10 +61,11 @@ public class WishController {
 
     @GetMapping("/showWishes")
     public String showWishes(@RequestParam("id")int id, Model model){
-        Wish wish = wishRepo.getWishByID(id);
-        model.addAttribute(wish);
+        ArrayList<Wish> wishes = wishRepo.getAllWishesByWishlist(id);
+        model.addAttribute("wishes",wishes);
+        model.addAttribute("wishlistId", id);
 
-        return "showWishes";
+        return "wishlist";
     }
 
     @PostMapping("/deleteWish")

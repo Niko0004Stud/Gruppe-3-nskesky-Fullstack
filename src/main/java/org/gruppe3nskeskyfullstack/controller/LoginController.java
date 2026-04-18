@@ -19,10 +19,10 @@ public class LoginController {
         this.userService=userService;
     }
 
-//    @GetMapping("/login")
-//    public String showLoginPage(){
-//        return "login";
-//    }
+    @GetMapping("/signUp")
+    public String showSignUpPage(){
+        return "signUp";
+    }
 
     @PostMapping("/tryLogin")
     public String login(@RequestParam("email") String email,

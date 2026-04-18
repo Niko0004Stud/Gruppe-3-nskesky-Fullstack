@@ -52,7 +52,7 @@ return "redirect:/";
         return "showWishes";
     }
 
-    @PostMapping("/deleteWishList")
+    @PostMapping("/deleteWish")
     public String deleteWishList(@RequestParam("id") int id){
         wishRepo.deleteWish(id);
 

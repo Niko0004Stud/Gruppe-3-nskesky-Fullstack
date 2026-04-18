@@ -20,6 +20,7 @@ public class UserInputValidation {
     public void validateName(String name) {
         String trimmed = name.trim();
         if ((trimmed.length() < 3 || trimmed.length() > 50)|| !trimmed.matches("[\\p{L}]+")){
+
             throw new IllegalArgumentException("Name must be between 3-50 characters");
         }
     }
@@ -40,10 +41,11 @@ public class UserInputValidation {
     }
 
     // gender VARCHAR(20) NOT NULL
-    public void validateGender(String name) {
-        String trimmed = name.trim();
-        if (trimmed.length() < 4 || trimmed.length() > 10||!trimmed.matches("[\\p{L}]")) {
-            throw new IllegalArgumentException("Gender cannot contain more than 10 characters");
+    public void validateGender(String gender) {
+        String trimmed = gender.trim();
+        if (trimmed.length() > 12/*||!trimmed.matches("[\\p{L}]")*/) {
+            System.out.println(gender);
+            throw new IllegalArgumentException("Gender cannot contain more than 12 characters");
         }
     }
 
@@ -57,8 +59,9 @@ public class UserInputValidation {
     //birthDate DATE NOT NULL
     public void validateBirthDate(String birthDate) {
         String trimmed = birthDate.trim();
-        if (trimmed.length() < 4 || trimmed.length() > 10|| !trimmed.matches("[\\p{L}]")) {
-            throw new IllegalArgumentException("Gender cannot contain more than 10 characters");
+        if (trimmed.length() < 4 || trimmed.length() > 12) {
+
+            throw new IllegalArgumentException("Birthdate cannot contain more than 12 characters");
         }
 
     }

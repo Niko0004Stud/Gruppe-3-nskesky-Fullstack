@@ -66,7 +66,4 @@ public class Wish {
         this.url = url;
     }
 
-
-
-
 }

@@ -34,7 +34,7 @@ public class LoginController {
         if(user!=null){
             session.setAttribute("user", user);
             System.out.println("Det virkede!");
-            return "redirect:/";
+            return "redirect:/userPage";
         }
         System.out.println("forkerte logindetaljer");
         return "redirect:/"; //ved fejlet login

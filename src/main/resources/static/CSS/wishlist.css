@@ -1,0 +1,62 @@
+.wishlist-header{
+    align-items: center;
+    background-color: lightblue;
+    padding: 15px 40px;
+
+}
+.header-text h1{
+    margin: 0;
+    font-size: 28px;
+    color:white;
+
+}
+.header-text p{
+   margin:0;
+    color:white;
+
+}
+
+button{
+    padding: 12px 25px;
+font-size: 16px;
+    border-radius: 30px;
+    border:none;
+    background-color: white;
+
+}
+
+form{
+    background-color: white;
+    padding: 25px;
+    width:320px;
+    border-radius: 10px;
+    margin:40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+body{
+    background-color:white;
+}
+
+
+label{
+    font-size: 20px;
+}
+
+.bottom{
+    float: right;
+}
+
+#Wishes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 250px;
+
+}
+

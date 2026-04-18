@@ -48,3 +48,4 @@ VALUES  ('1','lottes fødselsdag'),
         ('1','bents fødseldag'),
         ('2', 'Nicklas testWL')
                                             ;
+ALTER TABLE wishlists ADD COLUMN shareToken VARCHAR(255);

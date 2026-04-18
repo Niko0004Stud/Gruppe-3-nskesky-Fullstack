@@ -20,11 +20,6 @@ public class WishlistController {
     @Autowired
     WishListRepo wishListRepo;
 
-    @GetMapping("/getCreateWishlist")
-    public String createWishList(){
-        return "createWishList";
-    }
-
     @GetMapping("/wishlist/rename/{id}")
     public String showRenamePage(@PathVariable int id, Model model) {
 
@@ -79,14 +74,6 @@ public class WishlistController {
 
         return "redirect:/userPage";
     }
-
-    @PostMapping("/getUpdateWishList")
-    public String upDateWishList(@RequestParam("id") int id, Model model){
-        WishList wishList = wishListRepo.getWLById(id);
-        model.addAttribute(wishList);
-        return "updateWishList";
-    }
-
 
     @PostMapping("/deleteWishList")
     public String deleteWishList(@RequestParam("id") int id){

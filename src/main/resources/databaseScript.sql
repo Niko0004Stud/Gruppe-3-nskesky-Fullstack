@@ -39,6 +39,15 @@ CREATE TABLE wishes (
                         url VARCHAR(1000) NOT NULL
 );
 
+INSERT INTO users (firstName, lastName, email, tlfNumber, gender, birthDate, password)
+VALUES  ('Nicklas', 'Køppen', 'nicklasReal@email.dk', '12345667', 'mand', 20220208, 'sikkerKode1'),
+        ('Dummy', 'Haha', 'Fakemail@no.dk', '2020202', 'mand', 20010305, 'fakePassword');
+
+insert into wishlists (userID, name)
+VALUES  ('1','lottes fødselsdag'),
+        ('1','bents fødseldag'),
+        ('2', 'Nicklas testWL')
+                                            ;
 ALTER TABLE wishlists ADD COLUMN shareToken VARCHAR(255);
 
 

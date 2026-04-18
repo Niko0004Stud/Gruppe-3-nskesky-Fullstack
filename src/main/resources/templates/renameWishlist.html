@@ -8,18 +8,26 @@
 </head>
 <body>
 <main>
+    <header class="renameWishlist-header">
+        <div class="header-text">
+            <h2>Rename wishlist</h2>
 
-    <h2>Rename wishlist</h2>
+        </div>
+
+    </header>
+
 
     <form th:action="@{/wishlist/rename}" method="post">
 
+        <form id="RenameWishList">
+            <input type="hidden" name="id" th:value="${wishlist.id}" />
 
-        <input type="hidden" name="id" th:value="${wishlist.id}" />
+            <input type="text" name="name"
+                   th:value="${wishlist.name}"
+                   placeholder="Type the new name here" required>
+            <button type="submit">Save</button>
+        </form>
 
-        <input type="text" name="name"
-               th:value="${wishlist.name}"
-               placeholder="Type the new name here" required>
-        <button type="submit">Save</button>
     </form>
 
 </main>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wishlist</title>
+    <link rel="stylesheet" href="../static/CSS/style.css" th:href="@{CSS/style.css}">
+    <link rel="stylesheet" href="../static/CSS/wishlist.css" th:href="@{CSS/wishlist.css}">
+</head>
+<body>
+<header class="wishlist-header">
+    <div class="header-text">
+        <h1>Ønske Listens Navn</h1>
+        <h2>Brugerens Navn</h2>
+    </div>
+
+    <button class="bottom">Følgere</button>
+</header>
+<main>
+    <div>
+        <div class="Wish">
+            <div class="square" th:each="wish : ${wishes}">
+                <div>
+                    <span th:text="${wish.name}"></span>
+                    <span th:text="${wish.price}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:action="@{/wishlist/{wishlistId}/createWish(wishlistId=${wishListid})}" method="post" id="Wishes">
+        <label for="nameField">Ønskets navn:</label>
+        <input type="text" id="nameField" name="name" placeholder="Navn på ønske" required>
+        <label for="priceField">Pris:</label>
+        <input type="number" id="priceField" name="price" placeholder="Pris" required>
+        <label for="wishLinkField">Link til ønsket:</label>
+        <input type="text" id="wishLinkField" name="url" placeholder="URL til ønske">
+        <button type="submit">Tilføj ønske</button>
+    </form>
+</main>
+</body>
+</html>

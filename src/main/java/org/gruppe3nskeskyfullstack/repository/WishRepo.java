@@ -17,9 +17,9 @@ public class WishRepo {
     @Autowired//bruges til at få Spring til automatisk at indsætte et objekt
     private DataSource dataSource;
     //get all wishes by user. all wishes
-    public ArrayList<Wish> getAllWishesByUser(int userID){
+    public ArrayList<Wish> getAllWishesByWishlist(int wishlistID){
         ArrayList<Wish> wishes=new ArrayList<>();
-        String sql = "SELECT w.* FROM wishes w JOIN wishlists wl ON w.wishlistID = wl.id WHERE wl.user_id = ?";
+        String sql = "SELECT * FROM wishes WHERE wishlistID = ?";
         //sql til db: find wishes og deres wishlist og kun hvis wishlisten tilhører den bruger vi søger efter
 
         /*try with resources
@@ -29,7 +29,7 @@ public class WishRepo {
          */
         try(Connection connection=dataSource.getConnection();
             PreparedStatement statement=connection.prepareStatement(sql)){
-            statement.setInt(1,userID);//indsæt første parameter i sql streng, useris=værdien der intastes
+            statement.setInt(1,wishlistID);//indsæt første parameter i sql streng, useris=værdien der intastes
             ResultSet resultSet=statement.executeQuery();//sql kører i db. resultset er resultat
 
             while (resultSet.next())//gennemløb resultaterne, flyt cursoren til næste række
@@ -50,7 +50,7 @@ public class WishRepo {
     public void saveWish(Wish wish){
         String sql="INSERT INTO wishes ( wishlistID, name, price, url) VALUES(?,?,?,?)";
         //sql komando. databasen siger opret en ny række i wishes.. fyld kolonnerne:wishlistID, name, price, url
-
+        System.out.println("Du kom ind i saveWish()");
         try (Connection connection=dataSource.getConnection();
         PreparedStatement statement= connection.prepareStatement(sql)){
             statement.setInt(1,wish.getWishlistID());//henter wishlistID fra wishobjekt og sætter værdien ind i sqlkomando
@@ -89,7 +89,7 @@ public class WishRepo {
             {
                 if(resultSet.next())//next flytter cursoren til første række. returnerer true hvis der fande en wish med det id og false hvis det ikk e finder noget
                 {   wish=new Wish();
-                    wish.setId(resultSet.getInt("ID"));//fylder obj med data fra db
+                    wish.setId(resultSet.getInt("id"));//fylder obj med data fra db
                     wish.setWishlistID(resultSet.getInt("wishlistID"));
                     wish.setName(resultSet.getString("name"));
                     wish.setPrice(resultSet.getDouble("price"));

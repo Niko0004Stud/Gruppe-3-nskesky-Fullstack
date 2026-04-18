@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Page</title>
+
     <link rel="stylesheet" href="../static/CSS/style.css" th:href="@{CSS/style.css}">
+    <link rel="stylesheet" href="../static/CSS/userPage.css" th:href="@{CSS/userPage.css}">
 </head>
 <body>
-<h1>Your Wishlists</h1>
+<header class="yourWishList">
+    <h1>Your Wishlists</h1>
+</header>
+
 <main>
     <form th:action="@{/saveCreateWishList}" method="post" class="modify-form">
         <input type="text" name="name" placeholder="Type name of the list" required>
@@ -15,7 +20,9 @@
     </form>
     <ul>
         <li th:each="wl : ${wishlists}">
-            <span th:text="${wl.name}"></span>
+            <form th:action="@{/showWishlist}" method="get">
+                <button name="id" th:value="${wl.id}"><span th:text="${wl.name}"></span></button>
+            </form>
 
             <form th:action="@{/wishlist/action}" method="post">
                 <input type="hidden" name="wishlistId" th:value="${wl.id}" />

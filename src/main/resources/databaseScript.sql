@@ -38,3 +38,5 @@ CREATE TABLE wishes (
                         price DECIMAL NOT NULL,
                         url VARCHAR(1000) NOT NULL
 );
+
+ALTER TABLE wishlists ADD COLUMN shareToken VARCHAR(255);

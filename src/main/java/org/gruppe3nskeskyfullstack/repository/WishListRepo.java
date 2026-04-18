@@ -31,7 +31,7 @@ public class WishListRepo {
             while(resultSet.next()){
                 WishList wishList = new WishList();
                 wishList.setId(resultSet.getInt("ID"));
-                wishList.setUserid(resultSet.getInt("userID"));
+                wishList.setUserId(resultSet.getInt("userID"));
                 wishList.setName(resultSet.getString("name"));
                 wishLists.add(wishList);
             }
@@ -42,13 +42,13 @@ public class WishListRepo {
     }
 
     public void saveWL(WishList wishList){
-        String sql = "INSERT INTO wishlists (ID, userID, name) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO wishlists (userID, name, shareToken) VALUES (?, ?, ?)";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 
-            statement.setInt(1, wishList.getId());
-            statement.setInt(2, wishList.getUserid());
-            statement.setString(3,wishList.getName());
+            statement.setInt(1, wishList.getUserid());
+            statement.setString(2,wishList.getName());
+            statement.setString(3,wishList.getShareToken());
 
             statement.executeUpdate();
         }catch (SQLException e){
@@ -81,8 +81,9 @@ public class WishListRepo {
                 if (resultSet.next()){
                     wishList = new WishList();
                     wishList.setId(resultSet.getInt("ID"));
-                    wishList.setUserid(resultSet.getInt("userID"));
+                    wishList.setUserId(resultSet.getInt("userID"));
                     wishList.setName(resultSet.getString("name"));
+                    wishList.setShareToken(resultSet.getString("shareToken"));
                 }
             }
         } catch (SQLException e){
@@ -105,6 +106,31 @@ public class WishListRepo {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public WishList findByToken(String token) {
+        String sql = "SELECT * FROM wishlists WHERE shareToken = ?";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setString(1, token);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                WishList wishList = new WishList();
+                wishList.setId(resultSet.getInt("id"));
+                wishList.setName(resultSet.getString("name"));
+                wishList.setUserId(resultSet.getInt("userID"));
+                wishList.setShareToken(resultSet.getString("shareToken"));
+                return wishList;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 //    public WishListRepo(DataSource dataSource){

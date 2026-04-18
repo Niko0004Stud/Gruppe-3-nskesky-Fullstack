@@ -5,11 +5,13 @@ public class WishList {
     private String name;
     private int id;
     private int userId;
+    private String shareToken;
 
     public WishList(String name, int userId, int id){
         this.name=name;
         this.id=id;
         this.userId=userId;
+
     }
 
     public WishList(String name, int userId){
@@ -39,7 +41,13 @@ public class WishList {
         this.name = name;
     }
 
-    public void setUserid(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+    public void setShareToken(String shareToken){
+        this.shareToken=shareToken;
+    }
+    public String getShareToken(){
+        return shareToken;
     }
 }

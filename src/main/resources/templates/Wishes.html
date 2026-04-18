@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wishes</title>
+    <link rel="stylesheet" href="../static/CSS/style.css" th:href="@{CSS/style.css}">
+    <link rel="stylesheet" href="../static/CSS/Wishes.css" th:href="@{CSS/Wishes.css}">
+</head>
+<body>
+
+<div class="Wish">
+    <div class="square" th:each="wish : ${wishes}">
+        <img th:src="${wish.image}" alt="Wish image">
+
+        <div>
+            <label>Navn</label>
+            <span th:text="${wish.name}"></span>
+
+    </div>
+
+    </div>
+</body>
+
+
+</html>

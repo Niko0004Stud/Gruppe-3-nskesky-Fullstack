@@ -1,4 +1,35 @@
 body{
 
 }
+.renameWishlist-header{
+    align-items: center;
+    background-color: lightblue;
+    padding: 15px 40px;
+    text-align: center;
+}
+
+.header-text{
+    background-color: white;
+    width: 300px;
+    color: lightblue;
+
+}
+input{
+    width: 90%;
+    padding: 8px;
+}
+button{
+    padding: 8px 20px;
+    background-color: white;
+    color: black;
+}
+form{
+    background-color: white;
+    padding: 25px;
+    width:320px;
+    border-radius: 10px;
+    margin:40px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+}
 

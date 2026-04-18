@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.UUID;
+
 @Controller
 public class WishlistController {
 
@@ -48,12 +50,30 @@ public class WishlistController {
         return "redirect:/userPage";
     }
 
+    @GetMapping("/wishlist/share/{token}")
+    public String viewSharedWishlist(@PathVariable String token, Model model) {
+
+        System.out.println("TOKEN: " + token);
+
+        WishList wishList = wishListRepo.findByToken(token);
+        System.out.println("WL: " + wishList);
+
+        if (wishList == null) {
+            return "redirect:/userPage";
+        }
+
+        model.addAttribute("wishlist", wishList);
+
+        return "sharedWishlist";
+    }
+
     @PostMapping("/saveCreateWishList")
     public String postCreateWishList(
             @RequestParam("name") String name, HttpSession httpSession){
         User user = (User) httpSession.getAttribute("user");
         int userId = user.getId();
         WishList wishList = new WishList(name,userId); // userID skal findes på en anden måde
+        wishList.setShareToken(UUID.randomUUID().toString());
         wishListRepo.saveWL(wishList);
 
 
@@ -83,16 +103,16 @@ public class WishlistController {
 
         User user = (User) session.getAttribute("user");
 
-        WishList wl = wishListRepo.getWLById(wishlistId);
+        WishList wishList = wishListRepo.getWLById(wishlistId);
 
-        if (wl == null) {
+        if (wishList == null) {
             return "redirect:/userPage";
         }
 
         if (user == null) {
             return "redirect:/login";
         }
-        if (wl.getUserid() != user.getId()){
+        if (wishList.getUserid() != user.getId()){
             return "redirect:/userPage";
         }
 
@@ -103,7 +123,11 @@ public class WishlistController {
         if ("rename".equals(action)) {
             return "redirect:/wishlist/rename/" + wishlistId;
         }
+        if ("share".equals(action)) {
+            return "redirect:/wishlist/share/" + wishList.getShareToken();
+        }
 
         return "redirect:/userPage";
     }
+
 }

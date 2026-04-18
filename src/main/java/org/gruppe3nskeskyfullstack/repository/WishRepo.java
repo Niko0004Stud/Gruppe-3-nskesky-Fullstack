@@ -19,7 +19,7 @@ public class WishRepo {
     //get all wishes by user. all wishes
     public ArrayList<Wish> getAllWishesByUser(int userID){
         ArrayList<Wish> wishes=new ArrayList<>();
-        String sql = "SELECT w.* FROM wishes w JOIN wishlists wl ON w.wishlistID = wl.id WHERE wl.user_id = ?";
+        String sql = "SELECT w.* FROM wishes w JOIN wishlists wl ON w.wishlistID = wl.id WHERE wl.userID = ?";
         //sql til db: find wishes og deres wishlist og kun hvis wishlisten tilhører den bruger vi søger efter
 
         /*try with resources

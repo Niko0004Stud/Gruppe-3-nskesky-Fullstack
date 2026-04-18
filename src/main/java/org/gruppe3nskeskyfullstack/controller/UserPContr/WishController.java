@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpSession;
 import org.gruppe3nskeskyfullstack.model.User;
 import org.gruppe3nskeskyfullstack.model.Wish;
 import org.gruppe3nskeskyfullstack.model.WishList;
+import org.gruppe3nskeskyfullstack.repository.ReservationRepo;
+import org.gruppe3nskeskyfullstack.repository.WishListRepo;
 import org.gruppe3nskeskyfullstack.repository.WishRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,12 @@ import java.util.List;
 @Controller
 public class WishController {
 
-
     @Autowired
-    WishRepo wishRepo;// Autowire så vi får adgang til vores wishesrepo, da autowire gør at vi kan connecte vores klasser sammen
+    private ReservationRepo reservationRepo;
+    @Autowired
+    private WishListRepo wishListRepo;
+    @Autowired
+   private WishRepo wishRepo;// Autowire så vi får adgang til vores wishesrepo, da autowire gør at vi kan connecte vores klasser sammen
     //wishesrepo skal bruges
 
     /*@GetMapping("/getWishes")//Hvis man får en hhtp request, så sender den  tilbage til createWishes siden.
@@ -30,6 +35,35 @@ public class WishController {
         return "CreateWishes";
     }*/
 
+
+
+    }
+    @PostMapping("/reserve")
+    public String reserveWish(@RequestParam int wishId,
+                              HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        // ikke logget ind
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        Wish wish = wishRepo.getWishByID(wishId);
+        WishList wishlist = wishListRepo.getWLById(wish.getWishlistID());
+
+        // ejer sin egen liste
+        if (wishlist.getUserid() == user.getId()) {
+            return "redirect:/userPage";
+        }
+
+        reservationRepo.reserveWish(wishId, user.getId());
+
+        return "redirect:/wishlist/share/" + wishlist.getShareToken();
+    }
+
+    @PostMapping("/savewishes")
+    public String postCreatewishes(
     @PostMapping("/wishlist/{wishlistId}/createWish")
     public String createwish(
             @PathVariable("wishlistId") int wishlistId,

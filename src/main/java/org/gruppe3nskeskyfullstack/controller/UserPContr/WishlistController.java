@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,6 +21,31 @@ public class WishlistController {
     @GetMapping("/getCreateWishlist")
     public String createWishList(){
         return "createWishList";
+    }
+
+    @GetMapping("/wishlist/rename/{id}")
+    public String showRenamePage(@PathVariable int id, Model model) {
+
+        WishList wl = wishListRepo.getWLById(id);
+
+        model.addAttribute("wishlist", wl);
+
+        return "renameWishlist";
+    }
+
+
+    @PostMapping("/wishlist/rename")
+    public String renameWishlist(@RequestParam int id,
+                                 @RequestParam String name) {
+        System.out.println("rename hit");
+
+        WishList wl = new WishList();
+        wl.setId(id);
+        wl.setName(name);
+
+        wishListRepo.updateWL(wl);
+
+        return "redirect:/userPage";
     }
 
     @PostMapping("/saveCreateWishList")
@@ -75,7 +101,7 @@ public class WishlistController {
         }
 
         if ("rename".equals(action)) {
-            return "redirect:/renameWishlist" + wishlistId;
+            return "redirect:/wishlist/rename/" + wishlistId;
         }
 
         return "redirect:/userPage";

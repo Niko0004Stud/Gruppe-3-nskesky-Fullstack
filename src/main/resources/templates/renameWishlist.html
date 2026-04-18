@@ -9,6 +9,19 @@
 <body>
 <main>
 
+    <h2>Rename wishlist</h2>
+
+    <form th:action="@{/wishlist/rename}" method="post">
+
+
+        <input type="hidden" name="id" th:value="${wishlist.id}" />
+
+        <input type="text" name="name"
+               th:value="${wishlist.name}"
+               placeholder="Type the new name here" required>
+        <button type="submit">Save</button>
+    </form>
+
 </main>
 </body>
 </html>

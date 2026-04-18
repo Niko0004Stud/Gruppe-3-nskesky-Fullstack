@@ -92,15 +92,16 @@ public class WishListRepo {
     }
 
     public void updateWL(WishList wishList){
-        String sql = "UPDATE wishlists SET id = ?, userid = ?, name = ?";
+        String sql = "UPDATE wishlists SET name = ? WHERE id = ?";
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 
-            statement.setInt(1, wishList.getId());
-            statement.setInt(2,wishList.getUserid());
-            statement.setString(3,wishList.getName());
+
+            statement.setString(1,wishList.getName());
+            statement.setInt(2, wishList.getId());
 
             statement.executeUpdate();
+
         }catch (SQLException e){
             e.printStackTrace();
         }

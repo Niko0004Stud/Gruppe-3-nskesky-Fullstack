@@ -37,7 +37,7 @@ public class WishController {
 
 
 
-    }
+
     @PostMapping("/reserve")
     public String reserveWish(@RequestParam int wishId,
                               HttpSession session) {

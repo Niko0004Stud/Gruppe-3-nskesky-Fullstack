@@ -40,3 +40,13 @@ CREATE TABLE wishes (
 );
 
 ALTER TABLE wishlists ADD COLUMN shareToken VARCHAR(255);
+
+
+CREATE TABLE reservation (
+                             id INT AUTO_INCREMENT PRIMARY KEY,
+                             wishId INT,
+                             userId INT,
+
+                             FOREIGN KEY (wishId) REFERENCES wishes(id),
+                             FOREIGN KEY (userId) REFERENCES users(id)
+);

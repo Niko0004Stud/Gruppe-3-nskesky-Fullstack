@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/CSS/style.css" th:href="@{CSS/style.css}">
+    <link rel="stylesheet" href="../static/CSS/wishlist.css" th:href="@{CSS/wishlist.css}">
+</head>
+<body>
+<header class="wishlist-header">
+    <div class="header-text">
+        <h1>Ønske Listens Navn</h1>
+        <h1>Brugerens Navn</h1>
+    </div>
+
+    <button class="bottom">Følgere</button>
+</header>
+<main>
+    <form id="Wishes">
+        <label>Indtast dit ønske her</label>
+        <input th:type="text" id="name" placeholder="Navn på ønske" required>
+        <label>Indsæt Pris</label>
+        <input th:type="Pris" id="price" placeholder="Pris" required>
+        <label>Tilføre Billede</label>
+        <input th:type="text" id="image" placeholder="Link til billede">
+        <button type="submit">Tilføj ønsker</button>
+    </form>
+
+
+
+</main>
+</body>
+</html>

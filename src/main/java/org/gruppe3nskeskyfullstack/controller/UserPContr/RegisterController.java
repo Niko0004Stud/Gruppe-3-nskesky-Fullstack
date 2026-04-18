@@ -32,9 +32,13 @@ public class RegisterController {
 
             User user = new User(firstName, lastName, email, tlfNumber, gender, date, password);
             userInputValidation.validateUser(user);
-            userRepo.saveUser(user);
-            users.add(user);
-
-            return "/userPage";
+            if(userRepo.verifySignUp(email, password)){
+                userRepo.saveUser(user);
+                users.add(user);
+                return "/userPage";
+            }else {
+                System.out.println("Bruger med samme email eller password eksisterer allerede");
+                return "/signUp";
+            }
         }
     }

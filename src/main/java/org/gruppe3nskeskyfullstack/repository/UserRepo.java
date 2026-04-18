@@ -51,6 +51,25 @@ public class UserRepo {
         System.out.println(user.getFirstName());
         return user;
     }
+    // Returnerer false, hvis en bruger med samme email eller password allerede eksisterer
+    public boolean verifySignUp(String email, String password){
+        String sql = "SELECT * FROM users WHERE email = ? OR password = ? ";
+
+        try(Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)){
+
+            statement.setString(1, email);
+            statement.setString(2, password);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                return resultSet==null;
+            }
+
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 //private User user;
     public void saveUser(User user){
         String sql = "INSERT INTO users ( firstName, lastName, email, tlfNumber, gender, birthDate, password)" +

@@ -18,4 +18,9 @@ public class UserService {
     public User login(String email, String password) {
         return userRepo.verifyLogin(email, password);
     }
+
+    // At bruge denne ville nok være smartere
+    public boolean signUp(String email, String password){
+        return userRepo.verifySignUp(email, password);
+    }
 }

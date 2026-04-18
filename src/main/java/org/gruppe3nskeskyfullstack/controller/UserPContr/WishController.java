@@ -61,9 +61,6 @@ public class WishController {
 
         return "redirect:/wishlist/share/" + wishlist.getShareToken();
     }
-
-    @PostMapping("/savewishes")
-    public String postCreatewishes(
     @PostMapping("/wishlist/{wishlistId}/createWish")
     public String createwish(
             @PathVariable("wishlistId") int wishlistId,

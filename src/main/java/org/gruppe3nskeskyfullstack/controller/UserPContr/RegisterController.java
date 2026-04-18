@@ -37,7 +37,7 @@ public class RegisterController {
                 users.add(user);
                 return "/userPage";
             }else {
-                System.out.println("Bruger med samme email eller password eksisterer allerede");
+                System.out.println("Bruger med samme email eller password eksisterer allerede.");
                 return "/signUp";
             }
         }

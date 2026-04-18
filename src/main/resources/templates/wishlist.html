@@ -17,7 +17,18 @@
     <button class="bottom">Følgere</button>
 </header>
 <main>
-    <form th:action="@{/wishlist/{wishlistId}/createWish(wishlistId=${wishList.id})}" method="post" id="Wishes">
+    <div>
+        <div class="Wish">
+            <div class="square" th:each="wish : ${wishes}">
+                <div>
+                    <span th:text="${wish.name}"></span>
+                    <span th:text="${wish.price}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:action="@{/wishlist/{wishlistId}/createWish(wishlistId=${wishListid})}" method="post" id="Wishes">
         <label for="nameField">Ønskets navn:</label>
         <input type="text" id="nameField" name="name" placeholder="Navn på ønske" required>
         <label for="priceField">Pris:</label>
@@ -26,7 +37,6 @@
         <input type="text" id="wishLinkField" name="url" placeholder="URL til ønske">
         <button type="submit">Tilføj ønske</button>
     </form>
-
 </main>
 </body>
 </html>

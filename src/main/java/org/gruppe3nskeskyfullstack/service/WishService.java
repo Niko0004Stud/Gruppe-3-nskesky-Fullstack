@@ -18,8 +18,8 @@ public class WishService {
     }
 
     //metodesn sendes fra controller, userid videresendes. repo laver sqljoin. resultat fra db kommer i array. servise returnerer listen
-    public ArrayList<Wish>getAllWishesByUser(int userID){
-        return wishRepo.getAllWishesByUser(userID);
+    public ArrayList<Wish>getAllWishesByWishlist(int wishlistID){
+        return wishRepo.getAllWishesByWishlist(wishlistID);
     }
 
     public void saveWish(Wish wish){

@@ -15,7 +15,9 @@
     </form>
     <ul>
         <li th:each="wl : ${wishlists}">
-            <span th:text="${wl.name}"></span>
+            <form th:action="@{/showWishlist}" method="get">
+                <button name="id" th:value="${wl.id}"><span th:text="${wl.name}"></span></button>
+            </form>
 
             <form th:action="@{/wishlist/action}" method="post">
                 <input type="hidden" name="wishlistId" th:value="${wl.id}" />

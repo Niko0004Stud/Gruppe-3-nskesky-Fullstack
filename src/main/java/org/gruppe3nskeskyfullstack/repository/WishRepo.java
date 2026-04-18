@@ -19,7 +19,7 @@ public class WishRepo {
     //get all wishes by user. all wishes
     public ArrayList<Wish> getAllWishesByUser(int userID){
         ArrayList<Wish> wishes=new ArrayList<>();
-        String sql = "SELECT w.* FROM wishes w JOIN wishlists wl ON w.wishlistID = wl.id WHERE wl.user_id = ?";
+        String sql = "SELECT * FROM wishes JOIN wishlists wl ON w.wishlistID = wl.id WHERE wl.userID = ?";
         //sql til db: find wishes og deres wishlist og kun hvis wishlisten tilhører den bruger vi søger efter
 
         /*try with resources
@@ -50,7 +50,7 @@ public class WishRepo {
     public void saveWish(Wish wish){
         String sql="INSERT INTO wishes ( wishlistID, name, price, url) VALUES(?,?,?,?)";
         //sql komando. databasen siger opret en ny række i wishes.. fyld kolonnerne:wishlistID, name, price, url
-
+        System.out.println("Du kom ind i saveWish()");
         try (Connection connection=dataSource.getConnection();
         PreparedStatement statement= connection.prepareStatement(sql)){
             statement.setInt(1,wish.getWishlistID());//henter wishlistID fra wishobjekt og sætter værdien ind i sqlkomando

@@ -53,7 +53,7 @@ public class WishlistController {
             @RequestParam("name") String name, HttpSession httpSession){
         User user = (User) httpSession.getAttribute("user");
         int userId = user.getId();
-        WishList wishList = new WishList(name,userId); // userID skal findes på en anden måde
+        WishList wishList = new WishList(name,userId);
         wishListRepo.saveWL(wishList);
 
 

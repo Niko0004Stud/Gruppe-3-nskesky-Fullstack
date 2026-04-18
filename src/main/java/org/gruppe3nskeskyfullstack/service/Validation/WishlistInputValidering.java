@@ -5,7 +5,7 @@ import  org.springframework.stereotype.Component;
 @Component
 public class WishlistInputValidering {
 
-    //name VARCHAR(20) NOT NULL
+    //name VARCHAR(20) NOT NULL.
     public  void validationWishlist(String name){
         if (name==null){
             throw new IllegalArgumentException("ønskelistenavn må ikke være null");

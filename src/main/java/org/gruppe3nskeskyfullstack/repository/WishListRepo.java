@@ -132,9 +132,4 @@ public class WishListRepo {
 
         return null;
     }
-
-//    public WishListRepo(DataSource dataSource){
-//        this.dataSource=dataSource;
-//    }
-
 }

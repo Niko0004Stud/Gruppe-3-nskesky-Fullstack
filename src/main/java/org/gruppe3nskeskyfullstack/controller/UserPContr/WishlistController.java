@@ -38,7 +38,6 @@ public class WishlistController {
         return "renameWishlist";
     }
 
-
     @PostMapping("/wishlist/rename")
     public String renameWishlist(@RequestParam int id,
                                  @RequestParam String name) {
@@ -79,10 +78,9 @@ public class WishlistController {
             @RequestParam("name") String name, HttpSession httpSession){
         User user = (User) httpSession.getAttribute("user");
         int userId = user.getId();
-        WishList wishList = new WishList(name,userId); // userID skal findes på en anden måde
+        WishList wishList = new WishList(name,userId);
         wishList.setShareToken(UUID.randomUUID().toString());
         wishListRepo.saveWL(wishList);
-
 
         return "redirect:/userPage";
     }
@@ -91,7 +89,7 @@ public class WishlistController {
     public String deleteWishList(@RequestParam("id") int id){
         wishListRepo.deleteWL(id);
 
-        return"redirect:/userPage"; // Skal nok være til userpage eller noget andet
+        return"redirect:/userPage";
     }
 
     @PostMapping("/wishlist/action")
@@ -190,5 +188,4 @@ public class WishlistController {
 
         return "redirect:/showWishlist?id=" + wishlistId;
     }
-
 }

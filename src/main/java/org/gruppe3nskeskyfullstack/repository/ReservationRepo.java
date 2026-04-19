@@ -11,11 +11,8 @@ import java.sql.SQLException;
 @Repository
 public class ReservationRepo {
 
-
-
 @Autowired
 DataSource dataSource;
-
 
     public void reserveWish(int wishId, int userId) {
         String sql = "INSERT INTO reservation (wishId, userId) VALUES (?, ?)";

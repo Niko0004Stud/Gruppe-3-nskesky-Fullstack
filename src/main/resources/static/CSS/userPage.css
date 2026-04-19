@@ -25,8 +25,6 @@ h1{
     padding: 10px 20px;
     color: black;
     background: lightblue;
-
-
 }
 
 li{
@@ -44,6 +42,4 @@ select{
     width:100%;
     padding:25px 0;
     align-items: center;
-
-
 }

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class UserInputValidation {
 
-
-
     public void validateUser(User user) {
         validateName(user.getFirstName());
         validateEmail(user.getEmail());
@@ -63,7 +61,5 @@ public class UserInputValidation {
 
             throw new IllegalArgumentException("Birthdate cannot contain more than 12 characters");
         }
-
     }
-
 }

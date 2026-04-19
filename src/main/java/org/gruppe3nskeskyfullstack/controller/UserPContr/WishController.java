@@ -27,19 +27,7 @@ public class WishController {
     @Autowired
     private WishListRepo wishListRepo;
     @Autowired
-   private WishRepo wishRepo;
-
-
-    // Autowire så vi får adgang til vores wishesrepo, da autowire gør at vi kan connecte vores klasser sammen
-    //wishesrepo skal bruges
-
-    /*@GetMapping("/getWishes")//Hvis man får en hhtp request, så sender den  tilbage til createWishes siden.
-    public String FrontPage() { // den side den ligger på - createwishes- dette er bare et eksempel den ligger ikke i frontpage.
-        return "CreateWishes";
-    }*/
-
-
-
+    private WishRepo wishRepo;
 
     @PostMapping("/reserve")
     public String reserveWish(@RequestParam int wishId,
@@ -64,6 +52,7 @@ public class WishController {
 
         return "redirect:/wishlist/share/" + wishlist.getShareToken();
     }
+
     @PostMapping("/wishlist/{wishlistId}/createWish")
     public String createwish(
             @PathVariable("wishlistId") int wishlistId,
@@ -79,17 +68,7 @@ public class WishController {
         wishRepo.saveWish(wish);
 
         return "redirect:/showWishlist?id=" + wishlistId;
-
     }
-
-   /* @PostMapping("/getUpdateWish")
-    public String upDateWish(@RequestParam("id") int id, Model model){
-       Wish wish
-        model.addAttribute(Wish);
-        return "updateWishList";
-    }
-    */
-
 
     @GetMapping("/showWishes")
     public String showWishes(@RequestParam("id")int id, Model model){
@@ -120,11 +99,9 @@ public class WishController {
                 reservationRepo.reserveWish(wishId, user.getId());
             }
         }
-
         return "redirect:/showWishlist?id=" + wishlistId;
     }
-
-    }
+}
 
 
 

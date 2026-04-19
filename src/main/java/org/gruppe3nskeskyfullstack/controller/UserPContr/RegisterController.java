@@ -37,7 +37,7 @@ public class RegisterController {
                 userRepo.saveUser(user);
                 users.add(user);
 
-                return "/userPage";
+                return "/";
             }else {
                 System.out.println("Bruger med samme email eller password eksisterer allerede.");
                 return "/signUp";

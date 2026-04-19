@@ -8,16 +8,25 @@ public class Wish {
     private  String name;
     private double price;
     private String url;
+    private boolean reserved;
 
-    public Wish(int id, int wishlistID, String name, double price, String url) {
+    public Wish(int id, int wishlistID, String name, double price, String url, boolean reserved) {
         this.id = id;
         this.wishlistID = wishlistID;
         this.name = name;
         this.price = price;
         this.url = url;
+        this.reserved = reserved;
     }
-    public Wish( int wishlistID, String name, double price, String url) {
+    public Wish( int wishlistID, String name, double price, String url, boolean reserved) {
         this.wishlistID = wishlistID;
+        this.name = name;
+        this.price = price;
+        this.url = url;
+        this.reserved = reserved;
+    }
+    public Wish(int wishlistId, String name, double price, String url) {
+        this.wishlistID = wishlistId;
         this.name = name;
         this.price = price;
         this.url = url;
@@ -64,6 +73,12 @@ public class Wish {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public boolean getReserved(){
+        return reserved;
+    }
+    public void setReserved(boolean reserved){
+        this.reserved=reserved;
     }
 
 }

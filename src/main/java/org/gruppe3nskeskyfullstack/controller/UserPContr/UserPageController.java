@@ -22,14 +22,14 @@ public class UserPageController {
     @Autowired
     private WishRepo wishRepo;
 
-    @GetMapping("/showWishlist")
-    public String showWishlist(@RequestParam("id")int id,
-                               Model model){
-        ArrayList<Wish> wishes = wishRepo.getAllWishesByWishlist(id);
-        model.addAttribute("wishes",wishes);
-        System.out.println("Du nåede til return wishlist");
-        return "wishlist";
-    }
+//    @GetMapping("/showWishlist")
+//    public String showWishlist(@RequestParam("id")int id,
+//                               Model model){
+//        ArrayList<Wish> wishes = wishRepo.getAllWishesByWishlist(id);
+//        model.addAttribute("wishes",wishes);
+//        System.out.println("Du nåede til return wishlist");
+//        return "wishlist";
+//    }
 
     @GetMapping("/userPage")
     public String userPage(Model model, HttpSession session) {

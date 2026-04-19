@@ -62,7 +62,7 @@ public class UserRepo {
             statement.setString(2, password);
 
             try(ResultSet resultSet = statement.executeQuery()){
-                return resultSet==null;
+                return !resultSet.next();
             }
 
         } catch (SQLException e){

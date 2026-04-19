@@ -46,7 +46,7 @@ public class WishListRepo {
         try(Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql)){
 
-            statement.setInt(1, wishList.getUserid());
+            statement.setInt(1, wishList.getUserId());
             statement.setString(2,wishList.getName());
             statement.setString(3,wishList.getShareToken());
 

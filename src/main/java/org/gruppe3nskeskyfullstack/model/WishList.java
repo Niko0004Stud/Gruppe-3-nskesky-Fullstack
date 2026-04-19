@@ -29,7 +29,7 @@ public class WishList {
         return name;
     }
 
-    public int getUserid() {
+    public int getUserId() {
         return userId;
     }
 

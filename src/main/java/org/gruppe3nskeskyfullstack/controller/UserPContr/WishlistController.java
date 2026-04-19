@@ -2,8 +2,11 @@ package org.gruppe3nskeskyfullstack.controller.UserPContr;
 
 import jakarta.servlet.http.HttpSession;
 import org.gruppe3nskeskyfullstack.model.User;
+import org.gruppe3nskeskyfullstack.model.Wish;
 import org.gruppe3nskeskyfullstack.model.WishList;
+import org.gruppe3nskeskyfullstack.repository.ReservationRepo;
 import org.gruppe3nskeskyfullstack.repository.WishListRepo;
+import org.gruppe3nskeskyfullstack.repository.WishRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -19,6 +23,10 @@ public class WishlistController {
 
     @Autowired
     WishListRepo wishListRepo;
+    @Autowired
+    WishRepo wishRepo;
+    @Autowired
+    ReservationRepo reservationRepo;
 
     @GetMapping("/wishlist/rename/{id}")
     public String showRenamePage(@PathVariable int id, Model model) {
@@ -46,20 +54,24 @@ public class WishlistController {
     }
 
     @GetMapping("/wishlist/share/{token}")
-    public String viewSharedWishlist(@PathVariable String token, Model model) {
+    public String showSharedWishlist(@PathVariable String token,
+                                     Model model,
+                                     HttpSession session) {
 
-        System.out.println("TOKEN: " + token);
+        // hent wishlist via token
+        WishList wl = wishListRepo.findByToken(token);
 
-        WishList wishList = wishListRepo.findByToken(token);
-        System.out.println("WL: " + wishList);
+        // hent wishes (DET HER MANGLER HOS DIG)
+        List<Wish> wishes = wishRepo.getAllWishesByWishlist(wl.getId());
 
-        if (wishList == null) {
-            return "redirect:/userPage";
-        }
+        // tilføj til view
+        model.addAttribute("wishlist", wl);
+        model.addAttribute("wishes", wishes);
 
-        model.addAttribute("wishlist", wishList);
+        // gæst = ikke ejer
+        model.addAttribute("isOwner", false);
 
-        return "sharedWishlist";
+        return "wishlist";
     }
 
     @PostMapping("/saveCreateWishList")
@@ -99,7 +111,7 @@ public class WishlistController {
         if (user == null) {
             return "redirect:/login";
         }
-        if (wishList.getUserid() != user.getId()){
+        if (wishList.getUserId() != user.getId()){
             return "redirect:/userPage";
         }
 
@@ -115,6 +127,68 @@ public class WishlistController {
         }
 
         return "redirect:/userPage";
+    }
+    @GetMapping("/showWishlist")
+    public String showWishlist(@RequestParam int id, Model model,
+                               HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        WishList wl = wishListRepo.getWLById(id);
+        List<Wish> wishes = wishRepo.getAllWishesByWishlist(id);
+
+        boolean isOwner = false;
+        if (user != null) {
+            isOwner = (user.getId() == wl.getUserId());
+        }
+
+        for (Wish wish : wishes) {
+            boolean reserved = reservationRepo.isWishReserved(wish.getId());
+            wish.setReserved(reserved);
+        }
+
+        model.addAttribute("wishlist", wl);
+        model.addAttribute("wishes", wishes);
+        model.addAttribute("isOwner", isOwner);
+
+        return "wishlist";
+    }
+
+    @PostMapping("/wish/reserve")
+    public String reserveWish(@RequestParam int wishId,
+                              @RequestParam int wishlistId,
+                              HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+
+        WishList wl = wishListRepo.getWLById(wishlistId);
+
+
+        if (user.getId() == wl.getUserId()) {
+            return "redirect:/showWishlist?id=" + wishlistId;
+        }
+
+
+        if (!reservationRepo.isWishReserved(wishId)) {
+            reservationRepo.reserveWish(wishId, user.getId());
+        }
+
+        return "redirect:/showWishlist?id=" + wishlistId;
+    }
+
+    @PostMapping("/wish/delete")
+    public String deleteWish(@RequestParam int wishId,
+                             @RequestParam int wishlistId,
+                             HttpSession session) {
+
+        User user = (User) session.getAttribute("user");
+        WishList wl = wishListRepo.getWLById(wishlistId);
+
+        if (user.getId() == wl.getUserId()) {
+            wishRepo.deleteWish(wishId);
+        }
+
+        return "redirect:/showWishlist?id=" + wishlistId;
     }
 
 }

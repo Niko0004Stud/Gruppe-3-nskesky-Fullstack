@@ -27,7 +27,10 @@ public class WishController {
     @Autowired
     private WishListRepo wishListRepo;
     @Autowired
-   private WishRepo wishRepo;// Autowire så vi får adgang til vores wishesrepo, da autowire gør at vi kan connecte vores klasser sammen
+   private WishRepo wishRepo;
+
+
+    // Autowire så vi får adgang til vores wishesrepo, da autowire gør at vi kan connecte vores klasser sammen
     //wishesrepo skal bruges
 
     /*@GetMapping("/getWishes")//Hvis man får en hhtp request, så sender den  tilbage til createWishes siden.
@@ -44,7 +47,7 @@ public class WishController {
 
         User user = (User) session.getAttribute("user");
 
-        // ikke logget ind
+
         if (user == null) {
             return "redirect:/login";
         }
@@ -52,8 +55,8 @@ public class WishController {
         Wish wish = wishRepo.getWishByID(wishId);
         WishList wishlist = wishListRepo.getWLById(wish.getWishlistID());
 
-        // ejer sin egen liste
-        if (wishlist.getUserid() == user.getId()) {
+
+        if (wishlist.getUserId() == user.getId()) {
             return "redirect:/userPage";
         }
 
@@ -69,15 +72,13 @@ public class WishController {
             @RequestParam(value = "url", required = false) String url) {
 
         System.out.println("Du kom ind i createWish()");
-        /*WishList wishList = (WishList) httpSession.getAttribute("wishList");
-        int wishlistId = wishList.getId();*/
         if(url==null || url.isEmpty()){
             url="noURL";
         }
         Wish wish = new Wish(wishlistId, name, price, url);
         wishRepo.saveWish(wish);
 
-        return "redirect:/showWishes?id="+wishlistId;
+        return "redirect:/showWishlist?id=" + wishlistId;
 
     }
 
@@ -92,18 +93,35 @@ public class WishController {
 
     @GetMapping("/showWishes")
     public String showWishes(@RequestParam("id")int id, Model model){
+        WishList wl = wishListRepo.getWLById(id);
         ArrayList<Wish> wishes = wishRepo.getAllWishesByWishlist(id);
+
+        model.addAttribute("wishlist", wl);
         model.addAttribute("wishes",wishes);
         model.addAttribute("wishlistId", id);
 
         return "wishlist";
     }
 
-    @PostMapping("/deleteWish")
-    public String deleteWishList(@RequestParam("id") int id){
-        wishRepo.deleteWish(id);
+    @PostMapping("/wish/action")
+    public String handleAction(@RequestParam int wishId,
+                               @RequestParam int wishlistId,
+                               @RequestParam String action,
+                               HttpSession session) {
 
-        return"redirect:/"; // Skal nok være til userpage eller noget andet
+        User user = (User) session.getAttribute("user");
+
+        if (action.equals("delete")) {
+            wishRepo.deleteWish(wishId);
+        }
+
+        else if (action.equals("reserve")) {
+            if (user != null) {
+                reservationRepo.reserveWish(wishId, user.getId());
+            }
+        }
+
+        return "redirect:/showWishlist?id=" + wishlistId;
     }
 
     }

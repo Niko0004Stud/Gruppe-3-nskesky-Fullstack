@@ -34,8 +34,12 @@
                         </button>
 
 
-                        <button th:if="${!isOwner}" name="action" value="reserve">
+                        <button th:if="${!isOwner and !wish.reserved}" name="action" value="reserve">
                             Reserve
+                        </button>
+
+                        <button th:if="${!isOwner and wish.reserved}" disabled>
+                            Reserveret
                         </button>
 
                     </form>
